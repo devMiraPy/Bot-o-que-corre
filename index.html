@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brincadeira saliente</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        font-family: sans-serif;
+      }
+
+      .conteudo {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          #fce4ec 0%,
+          #e8eaf6 35%,
+          #e0f7fa 70%,
+          #f3e5f5 100%
+        );
+        background-size: 300% 300%;
+        animation: gradientShift 10s ease infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .bubble {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.55;
+        animation: float linear infinite;
+        pointer-events: none;
+      }
+
+      .bubble:nth-child(1) {
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle at 40% 40%, #ce93d8, #f48fb1);
+        top: -80px;
+        left: -60px;
+        animation-duration: 18s;
+        animation-name: float1;
+      }
+      .bubble:nth-child(2) {
+        width: 260px;
+        height: 260px;
+        background: radial-gradient(circle at 60% 30%, #80deea, #a5d6a7);
+        bottom: -60px;
+        right: -40px;
+        animation-duration: 22s;
+        animation-name: float2;
+      }
+      .bubble:nth-child(3) {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle at 50% 60%, #fff9c4, #ffcc80);
+        top: 30%;
+        left: 10%;
+        animation-duration: 15s;
+        animation-name: float3;
+      }
+      .bubble:nth-child(4) {
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(circle at 40% 50%, #b3e5fc, #c5cae9);
+        bottom: 20%;
+        right: 15%;
+        animation-duration: 20s;
+        animation-name: float4;
+      }
+      .bubble:nth-child(5) {
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(circle at 50% 40%, #f8bbd0, #e1bee7);
+        top: 60%;
+        left: 55%;
+        animation-duration: 25s;
+        animation-name: float1;
+      }
+
+      @keyframes float1 {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(40px, 30px) scale(1.05);
+        }
+        66% {
+          transform: translate(-20px, 50px) scale(0.97);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
+      @keyframes float2 {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        40% {
+          transform: translate(-50px, -30px) scale(1.08);
+        }
+        80% {
+          transform: translate(20px, -50px) scale(0.95);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
+      @keyframes float3 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(30px, -40px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      @keyframes float4 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate(-30px, 20px) rotate(10deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+      }
+
+      .card-quiz {
+        position: relative;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow:
+          0 8px 32px rgba(100, 80, 180, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7),
+          inset 0 -1px 0 rgba(180, 160, 220, 0.2);
+        backdrop-filter: blur(18px) saturate(1.4);
+        -webkit-backdrop-filter: blur(18px) saturate(1.4);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        width: 400px;
+        min-height: 220px;
+        padding: 32px 28px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .card-quiz h2 {
+        font-size: 1.4rem;
+        color: #4a3f6b;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      .card-quiz h3 {
+        font-size: 1rem;
+        color: #5c4e8a;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        opacity: 0.3;
+      }
+
+      .btn-sim {
+        background: linear-gradient(135deg, #9575cd, #ce93d8);
+        color: white;
+        border: none;
+        padding: 11px 32px;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(149, 117, 205, 0.4);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .btn-sim:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(149, 117, 205, 0.55);
+      }
+      .btn-sim:active {
+        transform: scale(0.97);
+      }
+
+      .btn-nao {
+        background: rgba(255, 255, 255, 0.5);
+        color: #5c4e8a;
+        border: 1.5px solid rgba(149, 117, 205, 0.4);
+        padding: 11px 32px;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .btn-nao:hover {
+        background: rgba(149, 117, 205, 0.15);
+      }
+
+      .btn-wrap {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="conteudo">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+
+      <div class="card-quiz">
+        <h2>Clique no NÃO</h2>
+        <h3>ou tente</h3>
+        <div class="btn-wrap">
+          <button class="btn-sim" onclick="sim()">SIM</button>
+          <button
+            class="btn-nao"
+            onclick="desvia(this)"
+            onmouseover="desvia(this)"
+          >
+            NÃO
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function sim() {
+        alert("Você aceitou jogar um jogo :)");
+        location.href = "https://www.youtube.com/";
+      }
+      function desvia(btn) {
+        btn.style.position = "fixed";
+        btn.style.bottom = geraPosicao(5, 88);
+        btn.style.left = geraPosicao(5, 85);
+        btn.style.top = "auto";
+      }
+      function geraPosicao(min, max) {
+        return Math.random() * (max - min) + min + "%";
+      }
+    </script>
+  </body>
+</html>
